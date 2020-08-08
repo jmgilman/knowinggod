@@ -1,0 +1,49 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+{{!-- The main content area on the author page --}}
+<main class="site-main">
+	<div class="site-content">
+
+		{{!-- Everything inside the #author tags pulls data from the author --}}
+		{{#author}}
+		<header class="cover archive-header">
+			{{#if cover_image}}
+			<div class="cover-bg" style="background-image: url({{cover_image}})"></div>
+			{{/if}}
+			<div class="cover-content">
+				<div class="inner">
+					<div class="archive-meta">{{plural ../pagination.total empty=(t "No posts by author") singular=(t "% post by author") plural=(t "% posts by author")}}</div>
+					<h1 class="archive-title">{{name}}</h1>
+					{{#if profile_image}}
+					<p class="author-avatar"><img src="{{profile_image}}" alt="{{name}}" class="avatar" /></p>
+					{{/if}}
+					{{#if bio}}
+					<p class="archive-description">{{bio}}</p>
+					{{/if}}
+					<p class="author-links">
+						{{#if location}}
+						<span class="author-location">{{> "icons/map-marker"}} {{location}}</span>
+						{{/if}}
+						{{#if website}}
+						<span class="author-website">{{> "icons/link"}} <a href="{{website}}" target="_blank" rel="noopener">{{t "Website"}}</a></span>
+						{{/if}}
+						{{#if facebook}}
+						<span class="author-facebook">{{> "icons/facebook"}} <a href="{{facebook_url}}" target="_blank" rel="noopener">Facebook</a></span>
+						{{/if}}
+						{{#if twitter}}
+						<span class="author-twitter">{{> "icons/twitter"}} <a href="{{twitter_url}}" target="_blank" rel="noopener">Twitter</a></span>
+						{{/if}}
+					</p>
+				</div><!-- .inner -->
+			</div><!-- .cover-content -->
+		</header><!-- .cover -->
+		{{/author}}
+
+		<div class="inner-wide">
+			{{!-- The tag below includes the post loop - partials/loop-archive.hbs --}}
+			{{> "loop-archive"}}
+		</div><!-- .inner-wide -->
+
+	</div><!-- .site-content -->
+</main><!-- .site-main -->

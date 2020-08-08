@@ -1,0 +1,29 @@
+<footer class="site-footer">
+	<div class="inner-wide">
+		<div class="site-footer-inside">
+
+			<div class="offsite-links">
+				{{#if @site.twitter}}
+				<a href="{{twitter_url}}" class="square dark" target="_blank" rel="noopener">{{> "icons/twitter"}}</a>
+				{{/if}}
+				{{#if @site.facebook}}
+				<a href="{{facebook_url}}" class="square dark" target="_blank" rel="noopener">{{> "icons/facebook"}}</a>
+				{{/if}}
+				{{!-- Manually include your desired social links. --}}
+				<a href="#" class="square dark" target="_blank" rel="noopener">{{> "icons/instagram"}}</a>
+				<a href="#" class="square dark" target="_blank" rel="noopener">{{> "icons/linkedin"}}</a>
+				<a href="#" class="square dark" target="_blank" rel="noopener">{{> "icons/github"}}</a>
+				<a href="{{@site.url}}/rss/" class="square dark" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
+			</div><!-- .offsite-links -->
+
+			<div class="site-info">
+				<a href="{{@site.url}}">{{@site.title}}</a> &copy; {{date format="YYYY"}}
+				<br />
+				{{{t "Curious theme by {jgtlink}" jgtlink="<a target=\"_blank\" href=\"https://justgoodthemes.com/\" rel=\"noopener\">Just Good Themes</a>"}}}
+			</div><!-- .site-info -->
+
+			<a href="#page" id="top-link" class="top-link square"><span class="icon-angle-up" aria-hidden="true"></span><span class="screen-reader-text">{{t "Back to top"}}</span></a>
+
+		</div><!-- .site-footer-inside -->
+	</div><!-- .inner-wide -->
+</footer><!-- .site-footer -->

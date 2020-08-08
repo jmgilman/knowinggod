@@ -1,0 +1,146 @@
+{{!< default}}
+{{!-- The tag above means - insert everything in this file into the {body} of the default.hbs template --}}
+
+<main class="site-main">
+	<div class="site-content">
+
+		{{!-- Everything inside the #post tags pulls data from the post --}}
+		{{#post}}
+
+		<article class="{{post_class}}">
+			<header class="cover full-height post-header">
+				{{#if feature_image}}
+				<div class="cover-bg" style="background-image: url({{feature_image}})"></div>
+				{{/if}}
+				<div class="cover-content">
+					<div class="inner">
+						{{#if tags}}
+						<div class="post-tags">
+							{{tags separator=""}}
+						</div><!-- .post-tags -->
+						{{/if}}
+						<h1 class="post-title">{{title}}</h1>
+						<div class="post-meta">
+							by <span class="post-author">{{authors}}</span> on <time class="published" datetime="{{date format='YYYY-MM-DD'}}">{{date format="LL"}}</time> <span class="reading-time">{{reading_time minute=(t "Read in 1 min") minutes=(t "Read in % min")}}</span>
+						</div><!-- .post-meta -->
+						<a href="#" class="scroll-down square white"><span class="icon-angle-down" aria-hidden="true"></span><span class="screen-reader-text">{{t "Scroll Down"}}</span>
+						</a>
+					</div><!-- .inner -->
+				</div><!-- .cover-content -->
+			</header><!-- .cover -->
+
+			{{#if @labs.members}}
+
+				{{#if access}}
+
+					{{!-- If the user has access, show post content, sharing links, atuhor info and comments --}}
+					<div class="post-content inner">
+						{{content}}
+					</div><!-- .post-content -->
+					<footer class="post-footer inner">
+						{{!-- Post sharing buttons - partials/post-share.hbs --}}
+						{{> post-share}}
+						{{!-- Post author list - partials/post-author-list.hbs --}}
+						{{> post-author-list}}
+					</footer><!-- .post-footer -->
+					{{!-- Disqus comments - partials/comments.hbs --}}
+					{{> comments}}
+
+				{{else}}
+
+					{{!-- If the user has no access, show post excerpt and subscribe cta --}}
+					<div class="post-excerpt inner">
+						<p>{{excerpt words="120"}}</p>
+					</div>
+					{{#has visibility="paid"}}
+					<div class="inner">
+						<section class="signup-box">
+							<h2 class="signup-box-title">{{t "This post is for paying subscribers only"}}</h2>
+								{{#if @member}}
+								<p>{{t "Upgrade your account to keep reading this post and get access to the full library of posts for paying subscribers only."}}</p>
+								<a class="button" href="{{@site.url}}/account/">{{t "View plans"}}</a>
+								{{else}}
+								<p>{{t "Sign up and upgrade your account to get access to the full library of posts for paying subscribers only."}}</p>
+								<a class="button" href="{{@site.url}}/signup/">{{t "Sign up"}}</a>
+								<p class="note">{{t "Already have an account?"}} <a href="{{@site.url}}/signin/">{{t "Sign in"}}</a></p>
+								{{/if}}
+						</section>
+					</div>
+					{{else}}
+					<div class="inner">
+						<section class="signup-box">
+							<h2 class="signup-box-title">{{t "This post is for subscribers only"}}</h2>
+							<p>{{t "Sign up now to get access to the full library of posts for subscribers only."}}</p>
+							<a class="button" href="{{@site.url}}/signup/">{{t "Sign up"}}</a>
+							<p class="note">{{t "Already have an account?"}} <a href="{{@site.url}}/signin/">{{t "Sign in"}}</a></p>
+						</section>
+					</div>
+					{{/has}}
+
+				{{/if}}
+
+			{{else}}
+
+				<div class="post-content inner">
+					{{content}}
+				</div><!-- .post-content -->
+				<footer class="post-footer inner">
+					{{!-- Post sharing buttons - partials/post-share.hbs --}}
+					{{> post-share}}
+					{{!-- Post author list - partials/post-author-list.hbs --}}
+					{{> post-author-list}}
+				</footer><!-- .post-footer -->
+				{{!-- Disqus comments - partials/comments.hbs --}}
+				{{> comments}}
+
+			{{/if}}
+
+		</article><!-- .post -->
+
+		{{#if @labs.members}}
+			{{#if access}}
+				{{!-- If the user has access and is not logged in, show subscribe --}}
+				{{#unless @member}}
+					<div class="inner">
+						<section class="subscribe-box">
+							<h2 class="subscribe-box-title">{{t "Subscribe to {sitetitle}" sitetitle=@site.title}}</h2>
+							<p>{{t "Subscribe today and get access to a private newsletter and new content every week!"}}</p>
+							{{> "member-subscribe-form"}}
+						</section><!-- .subscribe-box -->
+					</div><!-- .inner -->
+				{{/unless}}
+			{{/if}}
+		{{/if}}
+
+		{{!-- Previous/next post links --}}
+		<nav class="post-navigation">
+			{{#next_post}}
+			<a href="{{url}}" class="nav-next">
+				{{#if feature_image}}
+				<div class="nav-bg" style="background-image: url({{feature_image}})"></div>
+				{{/if}}
+				<div class="nav-inside">
+					<span class="nav-before">{{t "Next"}}</span>
+					<span class="nav-title">{{title}}</span>
+					<span class="nav-date"><time class="published" datetime="{{date format='YYYY-MM-DD'}}">{{date format="LL"}}</time></span>
+				</div>
+			</a>
+			{{/next_post}}
+			{{#prev_post}}
+			<a href="{{url}}" class="nav-previous">
+				{{#if feature_image}}
+				<div class="nav-bg" style="background-image: url({{feature_image}})"></div>
+				{{/if}}
+				<div class="nav-inside">
+					<span class="nav-before">{{t "Previous"}}</span>
+					<span class="nav-title">{{title}}</span>
+					<span class="nav-date"><time class="published" datetime="{{date format='YYYY-MM-DD'}}">{{date format="LL"}}</time></span>
+				</div>
+			</a>
+			{{/prev_post}}
+		</nav><!-- .post-navigation -->
+
+		{{/post}}
+
+	</div><!-- .site-content -->
+</main><!-- .site-main -->

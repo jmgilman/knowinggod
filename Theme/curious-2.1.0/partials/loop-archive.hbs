@@ -1,0 +1,25 @@
+<div class="post-grid">
+{{!-- This is the post loop - each post will be output using this markup --}}
+{{#foreach posts visibility="all"}}
+	<article class="grid-item {{post_class}}">
+		<header class="post-header">
+			{{#if tags}}
+			<div class="post-tags">
+				{{tags separator=""}}
+			</div>
+			{{/if}}
+			<h2 class="post-title"><a href="{{{url}}}" rel="bookmark">{{title}}</a></h2>
+			<div class="post-meta">
+				{{t "By"}} <span class="post-author">{{authors}}</span> {{t "on"}} <time class="published" datetime="{{date format='YYYY-MM-DD'}}">{{date format="LL"}}</time>
+			</div><!-- .post-meta -->
+		</header><!-- .post-header -->
+		<div class="post-content">
+			<p class="post-excerpt{{#unless custom_excerpt}} dots{{/unless}}">{{excerpt words="40"}}</p>
+			<p class="read-more"><a class="button light" href="{{url}}" title="{{title}}">{{t "Read More"}}</a></p>
+		</div><!-- .post-content -->
+	</article><!-- .post -->
+	{{/foreach}}
+</div><!-- .post-grid -->
+
+{{!-- Previous/next page links - displayed on every page --}}
+{{pagination}}

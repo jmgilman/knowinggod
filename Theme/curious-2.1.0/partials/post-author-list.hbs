@@ -1,0 +1,32 @@
+<div class="author-list">
+	<div class="author-list-title">{{t "Written by"}}</div>
+	{{#foreach authors}}
+	<div class="author-box">
+		{{#if profile_image}}
+		<div class="author-avatar">
+			<img src="{{profile_image}}" alt="{{name}}" class="avatar" />
+		</div>
+		{{/if}}
+		<div class="author-details">
+			<h2 class="author-title"><a href="{{url}}">{{name}}</a></h2>
+			{{#if bio}}
+			<p class="author-description">{{bio}}</p>
+			{{/if}}
+			<p class="author-links">
+				{{#if location}}
+				<span class="author-location">{{> "icons/map-marker"}} {{location}}</span>
+				{{/if}}
+				{{#if website}}
+				<span class="author-website">{{> "icons/link"}} <a href="{{website}}" target="_blank" rel="noopener">{{t "Website"}}</a></span>
+				{{/if}}
+				{{#if facebook}}
+				<span class="author-facebook">{{> "icons/facebook"}} <a href="{{facebook_url}}" target="_blank" rel="noopener">Facebook</a></span>
+				{{/if}}
+				{{#if twitter}}
+				<span class="author-twitter">{{> "icons/twitter"}} <a href="{{twitter_url}}" target="_blank" rel="noopener">Twitter</a></span>
+				{{/if}}
+			</p>
+		</div>
+	</div>
+	{{/foreach}}
+</div><!-- .author-list -->

@@ -1,0 +1,24 @@
+<aside class="sidebar">
+	<div class="sidebar-scrollable">
+		<button id="sidebar-hide" class="sidebar-toggle"><span class="screen-reader-text">{{t "Close Sidebar"}}</span><span aria-hidden="true" class="icon-close"></span></button>
+		<div class="widget-area">
+
+			{{#if @site.navigation}}
+			<nav class="widget widget-navigation">
+				<h2 class="widget-title">{{t "Explore Website"}}</h2>
+				{{navigation}}
+			</nav><!-- .widget -->
+			{{/if}}
+
+			{{!-- Includes the text widget - partials/widget-text1.hbs --}}
+			{{> "widget-text1"}}
+
+			{{!-- If members enabled and user not logged in, includes the subscribe form widget - partials/widget-subscribe.hbs --}}
+			{{> "widget-subscribe"}}
+
+			{{!-- Includes the text widget - partials/widget-text2.hbs --}}
+			{{> "widget-text2"}}
+
+		</div><!-- .widget-area -->
+	</div><!-- .sidebar-scrollable -->
+</aside><!-- .sidebar -->
